@@ -18,7 +18,7 @@ const allowedOrigin = process.env.ALLOWED_ORIGIN ?? "http://localhost:3000";
         );
     }
 
-const apiKey = request.headers.get("x-api-key");
+const apiKey = request.headers.get("x-secret-key");
 
     if(apiKey !== process.env.API_SECRET_KEY){
         return NextResponse.json(
