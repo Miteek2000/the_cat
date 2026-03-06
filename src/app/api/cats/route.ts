@@ -9,8 +9,10 @@ export async function GET(request: NextRequest) {
     const limit     = searchParams.get("limit")      ?? "12";
     const hasBreeds = searchParams.get("has_breeds") ?? "0";
 
+    const query = new URLSearchParams({ limit, has_breeds: hasBreeds });
+
     const response = await fetch(
-      `${CAT_API_URL}/images/search?limit=${limit}&has_breeds=${hasBreeds}`,
+      `${CAT_API_URL}/images/search?${query.toString()}`,
       {
         headers: {
           "x-api-key": CAT_API_KEY ?? "",
