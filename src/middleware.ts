@@ -9,12 +9,12 @@ export function middleware(request: NextRequest){
     }
 
 const origin = request.headers.get("origin") ?? "";
-const allowedOrigin = process.env.ALLOWED_ORIGIN ?? "http://localhost:3000";
+const allowedOrigins = (process.env.ALLOWED_ORIGIN ?? "").split(",");
 
-    if (origin && origin !== allowedOrigin){
+    if (origin && !allowedOrigins.includes(origin)){
         return NextResponse.json(
-            {success: false, message: "Origen no permitido"},
-            {status: 403}
+            { success: false, message: "Origen no permitido" },
+            { status: 403 }
         );
     }
 
